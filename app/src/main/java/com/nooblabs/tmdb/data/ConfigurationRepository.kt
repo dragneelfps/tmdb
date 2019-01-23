@@ -5,29 +5,18 @@ import java.util.*
 import javax.inject.Inject
 
 class ConfigurationRepository @Inject constructor(
-    private val configurationPersistenceSource: ConfigurationPersistenceSource,
-    private val configurationNetworkSource: ConfigurationNetworkSource
+    private val persistenceSource: IPersistenceSource,
+    private val networkSource: INetworkSource
 ) {
 
-    suspend fun getSavedConfiguration() = configurationPersistenceSource.getPersistedConfiguration()
+    suspend fun getSavedConfiguration() = persistenceSource.getPersistedConfiguration()
 
     suspend fun requestNewConfiguration(): Configuration {
-        val configuration = configurationNetworkSource.getConfiguration().apply {
+        val configuration = networkSource.getConfiguration().apply {
             timestamp = Date().time
         }
-        configurationPersistenceSource.saveNewConfiguration(configuration)
+        persistenceSource.saveNewConfiguration(configuration)
         return configuration
     }
 
-}
-
-interface ConfigurationPersistenceSource {
-
-    suspend fun getPersistedConfiguration(): Configuration?
-    fun saveNewConfiguration(configuration: Configuration)
-}
-
-interface ConfigurationNetworkSource {
-
-    suspend fun getConfiguration(): Configuration
 }

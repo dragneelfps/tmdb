@@ -1,8 +1,8 @@
 package com.nooblabs.tmdb.dagger
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.nooblabs.tmdb.data.ConfigurationNetworkSource
-import com.nooblabs.tmdb.data.ConfigurationPersistenceSource
+import com.nooblabs.tmdb.data.INetworkSource
+import com.nooblabs.tmdb.data.IPersistenceSource
 import com.nooblabs.tmdb.framework.RetrofitNetworkSource
 import com.nooblabs.tmdb.framework.RoomPersistenceSource
 import com.nooblabs.tmdb.network.API_KEY
@@ -21,11 +21,11 @@ import javax.inject.Singleton
 class ServiceModule {
 
     @Provides
-    fun configurationPersistenceSource(roomPersistenceSource: RoomPersistenceSource): ConfigurationPersistenceSource =
+    fun configurationPersistenceSource(roomPersistenceSource: RoomPersistenceSource): IPersistenceSource =
         roomPersistenceSource
 
     @Provides
-    fun configurationNetworkSource(retrofitNetworkSource: RetrofitNetworkSource): ConfigurationNetworkSource =
+    fun configurationNetworkSource(retrofitNetworkSource: RetrofitNetworkSource): INetworkSource =
             retrofitNetworkSource
 
     @Provides
