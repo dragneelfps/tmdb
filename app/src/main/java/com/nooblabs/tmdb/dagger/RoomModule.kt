@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.room.Room
 import com.nooblabs.tmdb.database.AppDatabase
 import com.nooblabs.tmdb.database.dao.ConfigurationDao
+import com.nooblabs.tmdb.database.dao.TrendingMoviesDao
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -22,5 +23,9 @@ class RoomModule @Inject constructor(private val application: Application) {
     @Provides
     @Singleton
     fun configurationDao(database: AppDatabase): ConfigurationDao = database.configurationDao()
+
+    @Provides
+    @Singleton
+    fun trendingMoviesDao(database: AppDatabase): TrendingMoviesDao = database.trendingMoviesDao()
 
 }

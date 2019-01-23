@@ -13,7 +13,8 @@ import javax.inject.Inject
 
 open class ListMoviesActivity : AppCompatActivity() {
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory<ListMoviesViewModel>
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory<ListMoviesViewModel>
 
     private lateinit var viewModel: ListMoviesViewModel
 
@@ -24,8 +25,11 @@ open class ListMoviesActivity : AppCompatActivity() {
         (application as MyApp).getAppComponent().inject(this)
 
         viewModel = getViewModel(viewModelFactory)
-         viewModel.getConfiguration().observe(this, Observer { configuration ->
+        viewModel.getConfiguration().observe(this, Observer { configuration ->
             logd(configuration)
+        })
+        viewModel.getTrendingMovies().observe(this, Observer { movies ->
+            logd(movies)
         })
     }
 }
