@@ -5,6 +5,6 @@ import javax.inject.Inject
 
 class GetConfiguration @Inject constructor(private val configurationRepository: ConfigurationRepository) {
 
-    operator fun invoke() = configurationRepository.getSavedConfiguration()
+    suspend operator fun invoke() = configurationRepository.getSavedConfiguration()
 
 }

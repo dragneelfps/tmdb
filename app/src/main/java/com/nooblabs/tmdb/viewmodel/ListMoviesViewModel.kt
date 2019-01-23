@@ -26,9 +26,7 @@ class ListMoviesViewModel @Inject constructor(private val getConfiguration: GetC
         val configurationLiveData = MutableLiveData<Configuration>()
         ioScope.launch {
 
-            val storedConfiguration = withContext(coroutineContext) {
-                getConfiguration.invoke()
-            }
+            val storedConfiguration = getConfiguration.invoke()
 
             if (storedConfiguration == null) {
                 logd("No stored configuration found")

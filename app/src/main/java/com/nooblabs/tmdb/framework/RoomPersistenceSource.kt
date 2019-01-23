@@ -10,7 +10,7 @@ import javax.inject.Singleton
 class RoomPersistenceSource @Inject constructor(private val configurationDao: ConfigurationDao) :
     ConfigurationPersistenceSource {
 
-    override fun getPersistedConfiguration(): Configuration? {
+    override suspend fun getPersistedConfiguration(): Configuration? {
         return configurationDao.getAllConfigurations().maxBy { it.timestamp ?: 0 }
     }
 

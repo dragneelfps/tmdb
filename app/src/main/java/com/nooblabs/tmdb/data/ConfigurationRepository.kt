@@ -9,7 +9,7 @@ class ConfigurationRepository @Inject constructor(
     private val configurationNetworkSource: ConfigurationNetworkSource
 ) {
 
-    fun getSavedConfiguration() = configurationPersistenceSource.getPersistedConfiguration()
+    suspend fun getSavedConfiguration() = configurationPersistenceSource.getPersistedConfiguration()
 
     suspend fun requestNewConfiguration(): Configuration {
         val configuration = configurationNetworkSource.getConfiguration().apply {
@@ -23,7 +23,7 @@ class ConfigurationRepository @Inject constructor(
 
 interface ConfigurationPersistenceSource {
 
-    fun getPersistedConfiguration(): Configuration?
+    suspend fun getPersistedConfiguration(): Configuration?
     fun saveNewConfiguration(configuration: Configuration)
 }
 
